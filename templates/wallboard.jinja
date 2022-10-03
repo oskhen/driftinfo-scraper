@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Flask App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/wallboard.css')
+      }}">
+</head>
+
+<div class="wrapper" , id="items">
+    {% for item in iponly %}
+    <div class="box iponly_{{loop.index}}">
+            <h2>IP-Only</h2>
+            {{item.0}}<br>
+            {{item.1}} - {{item.2}}
+    </div>
+    {% endfor %}
+</div>
+
+<br>
+
+<div class="wrapper" , id="items">
+    {% for item in zitius %}
+    <div class="box zitius_{{loop.index}}">
+            <h2>Zitius</h2>
+            {{item.0}}<br>
+            {{item.1}} - {{item.2}}
+    </div>
+    {% endfor %}
+</div>
+
+<br>
+
+<div class="wrapper" , id="items">
+    {% for item in itux %}
+    <div class="box itux_{{loop.index}}">
+            <h2>Itux</h2>
+            {{item.0}}<br>
+            {{item.1}} - {{item.2}}
+    </div>
+    {% endfor %}
+</div>
+
+</html>

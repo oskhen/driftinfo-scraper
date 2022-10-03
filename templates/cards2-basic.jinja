@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Flask App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/cards2-basic.css')
+      }}">
+</head>
+
+<h1> IP-Only </h1>
+<div class="wrapper" , id="items">
+    {% for item in iponly %}
+    <div class="box iponly_{{loop.index}}">
+            <h1>IP-Only</h1>
+            {{ item|safe }}
+    </div>
+    {% endfor %}
+</div>
+
+<h1> Zitius </h1>
+<div class="wrapper", id="items">
+    {% for item in zitius %}
+    <div class="box zitius_{{loop.index}}">
+        <h1>Zitius</h1>
+        {{ item|safe }}
+    </div>
+    {% endfor %}
+</div>
+
+<h1> OpenInfra </h1>
+<div class="wrapper" , id="items">
+    {% if openinfra %}
+        {% for item in openinfra %}
+        <div class="box openinfra_{{loop.index}}">
+                <h1>OpenInfra</h1>
+                {{ item|safe }}
+        </div>
+        {% endfor %}
+    {% else %}
+        <div>Openinfra har inga driftstörningar för tillfället. Se https://openinfra.com/status/ för mer information.</div>
+    {% endif %}
+</div>
+
+<h1> Itux </h1>
+<div class="wrapper", id="items">
+    {% for domain in itux %}
+    {% for item in domain.1 %}
+    <div class="box itux_{{loop.index}}">
+        <h1> Itux {{domain.0}} </h1>
+        {{ item|safe }}
+    </div>
+    {% endfor %}
+    {% endfor %}
+</div>
+
+
+
+</html>
