@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Flask App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/cards2.css')
+      }}">
+</head>
+<div class="wrapper" , id="items">
+    {% for item in iponly %}
+    <div class="box iponly_{{loop.index}}">
+        <div class="wrap-collabsible"> <input id="collapsible_{{loop.index}}" class="toggle" type="checkbox"> <label for="collapsible_{{loop.index}}"
+                class="lbl-toggle">
+                <h1>IP-Only</h1>
+            </label>
+            <div class="collapsible-content">
+                <div class="content-inner">
+                    <p>{{ item|safe }}</p>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+    {% endfor %}
+
+    {% for item in zitius %}
+    <div class="box zitius_{{loop.index}}">
+        <h1>Zitius</h1>
+        {{ item|safe }}
+    </div>
+    {% endfor %}
+
+    <div class="box 4124">
+        <div class="wrap-collabsible"> <input id="collapsible" class="toggle" type="checkbox"> <label for="collapsible"
+                class="lbl-toggle">More Info</label>
+            <div class="collapsible-content">
+                <div class="content-inner">
+                    <p>Lorem ipsum</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="box 123">
+        <div class="wrap-collabsible"> <input id="collapsible" class="toggle" type="checkbox"> <label for="collapsible"
+                class="lbl-toggle">More Info</label>
+            <div class="collapsible-content">
+                <div class="content-inner">
+                    <p>Lorem ipsum</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+</html>

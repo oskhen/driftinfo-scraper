@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
+body {
+  padding: 20px;
+  font-family: 'Helvetica', "regular";
+}
+
+.wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20%, 1fr));
+  grid-gap: 20px;
+}
+
+.box {
+  background-color: #dddddd;
+  color: #000000;
+  border-radius: 3px;
+  padding: 20px;
+  font-size: 72px;
+}
+
+input[type="checkbox"] {
+  display: none;
+}
+.wrap-collabsible {
+  margin: 1.2rem 0;
+} 
