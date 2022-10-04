@@ -41,7 +41,8 @@ def wallboard():
     return render_template("wallboard.jinja",
     iponly=iponly.getOverview(),
     zitius=zitius.getOverview(),
-    itux=itux.getOverview())
+    itux=itux.getOverview(),
+    openinfra=openinfra.getOverview())
 
 @app.route("/iponly")
 def routeIPOnly():

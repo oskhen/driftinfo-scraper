@@ -41,4 +41,16 @@
     {% endfor %}
 </div>
 
+<br>
+
+<div class="wrapper" , id="items">
+    {% for item in openinfra %}
+    <div class="box openinfra_{{loop.index}}">
+            <h2>Openinfra</h2>
+            {{item.0}}<br>
+            {{item.1}} - {{item.2}}
+    </div>
+    {% endfor %}
+</div>
+
 </html>

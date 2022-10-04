@@ -29,8 +29,8 @@ def getDriftLinks():
 
 def getOngoingDriftInfo():
 
-    # if cacheHandler.isCached("openinfra"):
-    #     return cacheHandler.loadData("openinfra")
+    if cacheHandler.isCached("openinfra"):
+        return cacheHandler.loadData("openinfra")
 
     links = getDriftLinks()
     
@@ -44,12 +44,26 @@ def getOngoingDriftInfo():
 
         driftinfo = soup.find_all(class_="status-wrap")
 
-        data = driftinfo[0]
+        data = driftinfo[0].decode_contents()
         issues.append(data)
 
-    # cacheHandler.saveData(issues, "openinfra")
+    cacheHandler.saveData(issues, "openinfra")
     return issues
+
+def getOverview():
+
+    driftinfo = getOngoingDriftInfo()
+
+    lst = []
+
+    for item in driftinfo:
+        location = item.split("Driftstörning ")[1].split("</h4>")[0]
+        occurred = ' '.join(item.split("<strong>")[1].split("</strong>")[0].split())
+        ETA = "?"
+        lst.append([location, occurred, ETA])
+
+    return lst
 
 if __name__ == "__main__":
     
-    print(getOngoingDriftInfo())
+    print(getOverview())
