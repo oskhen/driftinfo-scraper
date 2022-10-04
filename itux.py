@@ -21,7 +21,7 @@ def getSubPortals():
     links = [x.lstrip("=\"//").split("\"")[0] for x in soup.find_all(class_="small-block-grid-2 medium-block-grid-4 large-block-grid-6")[0].decode_contents().split("href")[1:]]
     return links
 
-def getDatafromLink(link):
+def getDatafromLink(link, driver):
 
     link = link.removeprefix("http://")
 
@@ -29,10 +29,6 @@ def getDatafromLink(link):
 
     #soup = BeautifulSoup(requests.get(url).content, "html.parser")
     #drift = soup.find_all(class_="large-12 columns large-centered")
-    service = Service(ChromeDriverManager().install())
-    options = Options()
-    options.add_argument("--headless")
-    driver = webdriver.Chrome(service=service, options=options)
 
     driver.get(url)
     html = driver.page_source
@@ -50,11 +46,19 @@ def getDatafromLink(link):
 
     return drift
 
+def getDriver():
+    service = Service(ChromeDriverManager().install())
+    options = Options()
+    options.add_argument("--headless")
+    driver = webdriver.Chrome(service=service, options=options)
+    return driver
+
 def getOngoingDriftInfo():
 
     if cacheHandler.isCached("itux"):
         return cacheHandler.loadData("itux")
 
+    driver = getDriver()
     links = getSubPortals()
     driftData = []
 
@@ -63,7 +67,7 @@ def getOngoingDriftInfo():
         if "://" in domain:
             domain = domain.split("://")[1]
         
-        data = getDatafromLink(link)
+        data = getDatafromLink(link, driver)
         if data:
             driftData.append([domain, data])
         else:
