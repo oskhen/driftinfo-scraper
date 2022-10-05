@@ -4,7 +4,7 @@ import requests
 from bs4 import BeautifulSoup
 import re
 from datetime import datetime, timedelta
-import cacheHandler
+import Handler
 
 fakeAgent = {
     'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36'
@@ -29,8 +29,8 @@ def getDriftLinks():
 
 def getOngoingDriftInfo():
 
-    if cacheHandler.isCached("openinfra"):
-        return cacheHandler.loadData("openinfra")
+    if Handler.isCached("openinfra"):
+        return Handler.loadData("openinfra")
 
     links = getDriftLinks()
     
@@ -47,7 +47,7 @@ def getOngoingDriftInfo():
         data = driftinfo[0].decode_contents()
         issues.append(data)
 
-    cacheHandler.saveData(issues, "openinfra")
+    Handler.saveData(issues, "openinfra")
     return issues
 
 def getOverview():

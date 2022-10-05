@@ -7,12 +7,14 @@ import re
 from datetime import datetime, timedelta
 import json
 import glob, os
-import cacheHandler
+import Handler
+import time
+
 
 def getDriftInfo():
 
-    if cacheHandler.isCached("iponly"):
-        return cacheHandler.loadData("iponly")
+    if Handler.isCached("iponly"):
+        return Handler.loadData("iponly")
 
     url = "https://cms.ip-only.se/feed/driftinfo"
 
@@ -39,7 +41,7 @@ def getDriftInfo():
     
     data = [ [driftinfo[i], extractedDataList[i] ] for i in range(len(driftinfo)) ]
 
-    cacheHandler.saveData(data, "iponly")
+    Handler.saveData(data, "iponly")
 
     return data
 
@@ -83,6 +85,8 @@ def getOverview():
         try:
             if item[1]["Status"] == "ONGOING" and datetime.strptime(item[1]["Occured"], "%d/%m/%Y %H:%M %Z") > ( datetime.now() - timedelta(weeks=2) ):
                 x = [item[1][y] for y in relevance]
+                age = int(time.time() - datetime.strptime(item[1]["Occured"], "%d/%m/%Y %H:%M %Z").timestamp())
+                x.append(Handler.getColorbyAge(age))
                 lst.append(x)
         except:
             continue

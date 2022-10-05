@@ -8,7 +8,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
-import cacheHandler
+import Handler
 
 chrDriver = "C:\\Users\\oh962419\\Chromedriver\\chromedriver"
 
@@ -55,8 +55,8 @@ def getDriver():
 
 def getOngoingDriftInfo():
 
-    if cacheHandler.isCached("itux"):
-        return cacheHandler.loadData("itux")
+    if Handler.isCached("itux"):
+        return Handler.loadData("itux")
 
     driver = getDriver()
     links = getSubPortals()
@@ -73,7 +73,7 @@ def getOngoingDriftInfo():
         else:
             continue
     
-    cacheHandler.saveData(driftData, "itux")
+    Handler.saveData(driftData, "itux")
 
     return driftData
 

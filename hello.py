@@ -16,7 +16,7 @@ app = Flask(__name__)
 # default = >12h
 # green = solved
 
-## Standardize timestmaps
+## Standardize timestamps
 
 def loadZitiusInfo():
     

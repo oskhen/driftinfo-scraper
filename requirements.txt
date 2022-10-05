@@ -1,5 +1,5 @@
 flask
-BeautifulSoup
+BeautifulSoup4
 selenium
 webdriver_manager
 requests

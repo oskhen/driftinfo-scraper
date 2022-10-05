@@ -4,12 +4,13 @@ import requests
 from bs4 import BeautifulSoup
 import re
 from datetime import datetime, timedelta
-import cacheHandler
+import Handler
+import time
 
 def getDriftInfo():
 
-    if cacheHandler.isCached("zitius"):
-        return cacheHandler.loadData("zitius")
+    if Handler.isCached("zitius"):
+        return Handler.loadData("zitius")
     
     url = "https://zmarket.se/privat/driftinformation"
 
@@ -27,7 +28,7 @@ def getDriftInfo():
     for i in range(len(rawed)):
         rawed[i] = [(delim + x.strip()) for x in rawed[i] if x.strip()]
 
-    cacheHandler.saveData(rawed, "zitius")
+    Handler.saveData(rawed, "zitius")
 
     return rawed
 
@@ -68,7 +69,9 @@ def getOverview():
             
             areas = ', '.join([x.removesuffix("</li>") for x in item.split("<ul>")[1].split("</ul>")[0].strip("\n").split("<li>")[2:]])
 
-            x = [areas, occurred, ETA]
+            age = int(time.time() - datetime.strptime(occurred, "%Y-%m-%d %H:%M:%S").timestamp())
+            x = [areas, occurred, ETA, Handler.getColorbyAge(age)]
+
             lst.append(x)
     
     return lst
